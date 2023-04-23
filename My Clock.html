@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:5500/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title> My Clock </title>
+        <link rel="stylesheet" href="./My Clock_files/style.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="clock">
+
+
+                <div class="circle" id="sc" style="--clr:#04fc43; transform: rotateZ(84deg);"><i></i></div>
+                <div class="circle circle2" id="mn" style="--clr:#fee800; transform: rotateZ(312deg);"><i></i></div>
+                <div class="circle circle3" id="hr" style="--clr:#ff2972; transform: rotateZ(716deg);"><i></i></div>
+
+
+                <span style="--i:1;"><b>1</b></span>
+                <span style="--i:2;"><b>2</b></span>
+                <span style="--i:3;"><b>3</b></span>
+                <span style="--i:4;"><b>4</b></span>
+                <span style="--i:5;"><b>5</b></span>
+                <span style="--i:6;"><b>6</b></span>
+                <span style="--i:7;"><b>7</b></span>
+                <span style="--i:8;"><b>8</b></span>
+                <span style="--i:9;"><b>9</b></span>
+                <span style="--i:10;"><b>10</b></span>
+                <span style="--i:11;"><b>11</b></span>
+                <span style="--i:12;"><b>12</b></span>
+            </div>
+            <!-- Digital clock -->
+            <div id="time">
+                <div id="hour" style="--clr:#ff2972;">23</div>
+                <div id="minutes" style="--clr:#fee800;">52</div>
+                <div id="seconds" style="--clr:#04fc43;">14</div>
+            </div>
+        </div>
+        <script>
+            let hr = document.querySelector('#hr');
+let mn = document.querySelector('#mn');
+let sc = document.querySelector('#sc');
+setInterval(() =>{
+  let day = new Date();
+  let hh = day.getHours() * 30;
+  let mm = day.getMinutes() * 6;
+  let ss = day.getSeconds() * 6;
+  hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+  mn.style.transform = `rotateZ(${mm}deg)`;
+  sc.style.transform = `rotateZ(${ss}deg)`;
+
+  //digital clock 
+  let hours = document.getElementById('hour');
+  let minutes = document.getElementById('minutes');
+  let seconds = document.getElementById('seconds');
+  let ampm = document.getElementById('ampm');
+
+  let h = new Date().getHours();
+  let m = new Date().getMinutes();
+  let s = new Date().getSeconds();
+ // add zero before single digit
+    h = (h<10 ? "0" + h : h);
+    m = (m<10 ? "0" + m : m);
+    s = (s<10 ? "0" + s : s);
+
+  hours.innerHTML = h;
+  minutes.innerHTML = m;
+  seconds.innerHTML= s;
+})
+    
+        </script>
+    <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
